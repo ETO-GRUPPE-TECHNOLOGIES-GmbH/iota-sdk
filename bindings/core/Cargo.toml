@@ -9,12 +9,12 @@ license = "Apache-2.0"
 publish = false
 
 [dependencies]
+
+
 iota-sdk = { path = "../../sdk", default-features = false, features = [
     "wallet",
     "tls",
 ] }
-
-backtrace = { version = "0.3.69", default-features = false, features = ["std"] }
 derivative = { version = "2.2.0", default-features = false }
 fern-logger = { version = "0.5.0", default-features = false }
 futures = { version = "0.3.30", default-features = false }
@@ -24,6 +24,7 @@ iota-crypto = { version = "0.23.1", default-features = false, features = [
 ] }
 log = { version = "0.4.20", default-features = false }
 packable = { version = "0.8.3", default-features = false }
+backtrace = { version = "0.3.68", default-features = false, features = ["std"] }
 prefix-hex = { version = "0.7.1", default-features = false }
 primitive-types = { version = "0.12.2", default-features = false }
 serde = { version = "1.0.196", default-features = false }
