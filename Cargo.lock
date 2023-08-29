@@ -1575,7 +1575,6 @@ dependencies = [
  "bs58",
  "bytemuck",
  "cfg-if",
- "derive_builder",
  "derive_more",
  "dotenvy",
  "fern-logger",
