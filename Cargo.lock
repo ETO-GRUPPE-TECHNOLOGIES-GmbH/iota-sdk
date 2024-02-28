@@ -1574,6 +1574,8 @@ dependencies = [
  "bitflags 2.4.2",
  "bs58",
  "bytemuck",
+ "cfg-if",
+ "derive_builder",
  "derive_more",
  "dotenvy",
  "fern-logger",
