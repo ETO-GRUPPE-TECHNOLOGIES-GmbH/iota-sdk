@@ -11,7 +11,7 @@ pub(crate) mod migrate_4;
 
 use std::collections::HashMap;
 
-use anymap::Map;
+use anymap3::Map;
 use async_trait::async_trait;
 #[cfg(not(target_family = "wasm"))]
 #[cfg(feature = "rocksdb")]
@@ -29,7 +29,7 @@ pub(crate) const MIGRATION_VERSION_KEY: &str = "migration-version";
 #[cfg(feature = "stronghold")]
 struct LatestBackupMigration(MigrationVersion);
 
-static MIGRATIONS: Lazy<Map<dyn anymap::any::Any + Send + Sync>> = Lazy::new(|| {
+static MIGRATIONS: Lazy<Map<dyn std::any::Any + Send + Sync>> = Lazy::new(|| {
     let mut migrations = Map::new();
     #[cfg(feature = "storage")]
     {

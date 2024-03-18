@@ -134,10 +134,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "080e9890a082662b09c1ad45f567faeeb47f22b5fb23895fbe1e651e718e25ca"
 
 [[package]]
-name = "anymap"
-version = "0.12.1"
+name = "anymap3"
+version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "33954243bd79057c2de7338850b85983a44588021f8a5fee574a8888c6de4344"
+checksum = "9316150bf847270bd54e404c3fb1c5d3c6af118b3f0c3b42097da5ceafbe7c27"
 
 [[package]]
 name = "arrayref"
@@ -1565,7 +1565,7 @@ dependencies = [
 name = "iota-sdk"
 version = "1.1.4"
 dependencies = [
- "anymap",
+ "anymap3",
  "async-trait",
  "bech32",
  "bitflags 2.4.2",

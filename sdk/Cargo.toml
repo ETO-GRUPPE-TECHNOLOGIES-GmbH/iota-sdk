@@ -59,7 +59,9 @@ serde_json = { version = "1.0.113", default-features = false, features = [
 
 # Optional dependencies
 
-anymap = { version = "0.12.1", default-features = false, optional = true }
+anymap3 = { version = "1.0.0", default-features = false, optional = true, features = [
+    "std",
+] }
 async-trait = { version = "0.1.77", default-features = false, optional = true }
 bs58 = { version = "0.5.0", default-features = false, optional = true }
 fern-logger = { version = "0.5.0", default-features = false, optional = true }
@@ -180,7 +182,7 @@ std = [
 storage = [
     "iota-crypto/chacha",
     "dep:time",
-    "dep:anymap",
+    "dep:anymap3",
     "dep:once_cell",
     "dep:heck",
 ]
@@ -188,7 +190,7 @@ stronghold = [
     "iota_stronghold",
     "iota-crypto/chacha",
     "dep:time",
-    "dep:anymap",
+    "dep:anymap3",
     "dep:once_cell",
     "dep:heck",
 ]
