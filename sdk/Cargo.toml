@@ -113,7 +113,7 @@ tokio = { version = "1.36.0", default-features = false, features = [
 ], optional = true }
 
 [target.'cfg(target_family = "wasm")'.dependencies]
-gloo-storage = { version = "0.3.0", default-features = false, optional = true }
+web-sys = { version = "0.3", features = ["Storage"], optional = true }
 gloo-timers = { version = "0.3.0", default-features = false, features = [
     "futures",
 ] }
@@ -185,6 +185,7 @@ storage = [
     "dep:anymap3",
     "dep:once_cell",
     "dep:heck",
+	"dep:web-sys",
 ]
 stronghold = [
     "iota_stronghold",
@@ -217,6 +218,8 @@ client = [
     "iota-crypto/random",
 ]
 wallet = ["client"]
+
+test = []
 
 # Ed25519 Examples
 

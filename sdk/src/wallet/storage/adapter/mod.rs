@@ -12,6 +12,9 @@ pub mod rocksdb;
 #[cfg_attr(docsrs, doc(cfg(feature = "jammdb")))]
 pub mod jammdb;
 
+#[cfg(target_family = "wasm")]
+pub mod wasm;
+
 use async_trait::async_trait;
 
 use crate::client::storage::StorageAdapter;
