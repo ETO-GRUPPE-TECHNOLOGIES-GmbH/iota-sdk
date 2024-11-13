@@ -31,6 +31,7 @@ impl WasmAdapter {
         let out = || -> Result<bool, JsValue> {
             storage.set_item(PROBE_KEY, PROBE_VALUE)?;
             let read = storage.get_item(PROBE_KEY)?;
+            let _ = storage.remove_item(PROBE_KEY);
             Ok(read.is_some_and(|v| v == PROBE_VALUE))
         }();
 
