@@ -17,18 +17,17 @@ pub struct WasmAdapter {
     _ignored: (),
 }
 
-const PROBE_KEY: &str = "iota-sdk-availability-test";
-const PROBE_VALUE: &str = "local storage is available!";
-
 impl WasmAdapter {
+    /// Tries to instantiate a new [`WasmAdapter`] by checking if the local storage API is
+    /// available with a simple write-read cycle.
     pub fn new() -> crate::wallet::Result<Self> {
-        // just do a quick check to see if the API is available!
-
-        // do a write-read cycle, and if any of them fail, wrap the error and return it
-
         let storage = Self::storage()?;
 
+        // do a write-read cycle, and if any of them fail, wrap the error and return it
         let out = || -> Result<bool, JsValue> {
+            const PROBE_KEY: &str = "iota-sdk-availability-test";
+            const PROBE_VALUE: &str = "probe_value";
+
             storage.set_item(PROBE_KEY, PROBE_VALUE)?;
             let read = storage.get_item(PROBE_KEY)?;
             let _ = storage.remove_item(PROBE_KEY);
