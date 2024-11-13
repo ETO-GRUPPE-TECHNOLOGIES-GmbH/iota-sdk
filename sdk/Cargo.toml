@@ -219,8 +219,6 @@ client = [
 ]
 wallet = ["client"]
 
-test = []
-
 # Ed25519 Examples
 
 [[example]]
