@@ -141,7 +141,7 @@ where
                     crate::wallet::storage::adapter::jammdb::JammdbStorageAdapter::new(storage_options.path.clone())?
                 } else if #[cfg(target_family = "wasm")] {
                     // if we are on wasm, try to use the browser local storage
-                    crate::wallet::storage::adapter::wasm::WasmAdapter::new()?
+                    crate::wallet::storage::adapter::wasm::WasmAdapter::new(storage_options.path.clone())?
                 } else {
                     crate::wallet::storage::adapter::memory::Memory::default()
                 }
