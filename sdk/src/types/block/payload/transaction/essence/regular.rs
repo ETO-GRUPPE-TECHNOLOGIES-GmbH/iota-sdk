@@ -4,17 +4,17 @@
 use alloc::vec::Vec;
 
 use hashbrown::HashSet;
-use packable::{bounded::BoundedU16, prefix::BoxedSlicePrefix, Packable};
+use packable::{Packable, bounded::BoundedU16, prefix::BoxedSlicePrefix};
 
 use crate::types::{
+    ValidationParams,
     block::{
-        input::{Input, INPUT_COUNT_RANGE},
-        output::{InputsCommitment, NativeTokens, Output, TokenId, OUTPUT_COUNT_RANGE},
+        Error,
+        input::{INPUT_COUNT_RANGE, Input},
+        output::{InputsCommitment, NativeTokens, OUTPUT_COUNT_RANGE, Output, TokenId},
         payload::{OptionalPayload, Payload},
         protocol::ProtocolParameters,
-        Error,
     },
-    ValidationParams,
 };
 
 /// A builder to build a [`RegularTransactionEssence`].
@@ -242,7 +242,7 @@ fn verify_outputs<const VERIFY: bool>(outputs: &[Output], visitor: &ProtocolPara
 
             total_native_tokens.extend(native_tokens.iter().map(|n| n.token_id()));
 
-            if total_native_tokens.len() > NativeTokens::COUNT_MAX.into() {
+            if total_native_tokens.len() > NativeTokens::COUNT_MAX as usize {
                 return Err(Error::InvalidTransactionNativeTokensCount(
                     total_native_tokens.len() as u16
                 ));
@@ -291,8 +291,8 @@ pub(crate) mod dto {
 
     use super::*;
     use crate::types::{
-        block::{input::dto::InputDto, output::dto::OutputDto, payload::dto::PayloadDto, Error},
         TryFromDto,
+        block::{Error, input::dto::InputDto, output::dto::OutputDto, payload::dto::PayloadDto},
     };
 
     /// Describes the essence data making up a transaction by defining its inputs and outputs and an optional payload.
