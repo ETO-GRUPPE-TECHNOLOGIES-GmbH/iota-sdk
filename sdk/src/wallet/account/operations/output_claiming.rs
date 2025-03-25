@@ -10,14 +10,14 @@ use crate::{
     types::block::{
         address::Address,
         output::{
-            unlock_condition::{AddressUnlockCondition, StorageDepositReturnUnlockCondition},
             BasicOutputBuilder, MinimumStorageDepositBasicOutput, NativeTokens, NativeTokensBuilder, NftOutputBuilder,
             Output, OutputId,
+            unlock_condition::{AddressUnlockCondition, StorageDepositReturnUnlockCondition},
         },
     },
     wallet::account::{
-        operations::helpers::time::can_output_be_unlocked_now, types::Transaction, Account, AccountDetails, OutputData,
-        TransactionOptions,
+        Account, AccountDetails, OutputData, TransactionOptions, operations::helpers::time::can_output_be_unlocked_now,
+        types::Transaction,
     },
 };
 
@@ -279,7 +279,7 @@ where
         for output_data in &outputs_to_claim {
             if let Some(native_tokens) = output_data.output.native_tokens() {
                 // Skip output if the max native tokens count would be exceeded
-                if get_new_native_token_count(&new_native_tokens, native_tokens)? > NativeTokens::COUNT_MAX.into() {
+                if get_new_native_token_count(&new_native_tokens, native_tokens)? > NativeTokens::COUNT_MAX as usize {
                     log::debug!("[OUTPUT_CLAIMING] skipping output to not exceed the max native tokens count");
                     continue;
                 }
@@ -362,7 +362,7 @@ where
                         if let Some(native_tokens) = output_data.output.native_tokens() {
                             // Skip input if the max native tokens count would be exceeded
                             if get_new_native_token_count(&new_native_tokens, native_tokens)?
-                                > NativeTokens::COUNT_MAX.into()
+                                > NativeTokens::COUNT_MAX as usize
                             {
                                 log::debug!(
                                     "[OUTPUT_CLAIMING] skipping input to not exceed the max native tokens count"

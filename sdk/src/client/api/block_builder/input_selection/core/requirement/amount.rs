@@ -10,8 +10,8 @@ use crate::{
         address::Address,
         input::INPUT_COUNT_MAX,
         output::{
-            unlock_condition::StorageDepositReturnUnlockCondition, AliasOutputBuilder, AliasTransition,
-            FoundryOutputBuilder, NativeTokens, NftOutputBuilder, Output, OutputId, Rent, TokenId,
+            AliasOutputBuilder, AliasTransition, FoundryOutputBuilder, NativeTokens, NftOutputBuilder, Output,
+            OutputId, Rent, TokenId, unlock_condition::StorageDepositReturnUnlockCondition,
         },
     },
 };
@@ -164,7 +164,7 @@ impl AmountSelection {
 
                 selected_native_tokens.extend(nt.iter().map(|t| t.token_id()));
                 // Don't select input if the tx would end up with more than allowed native tokens.
-                if selected_native_tokens.len() > NativeTokens::COUNT_MAX.into() {
+                if selected_native_tokens.len() > NativeTokens::COUNT_MAX as usize {
                     continue;
                 } else {
                     // Update selected with NTs from this output.
@@ -348,9 +348,9 @@ impl InputSelection {
                 .flatten(),
         )
         .len()
-            > NativeTokens::COUNT_MAX.into();
+            > NativeTokens::COUNT_MAX as usize;
 
-        if self.selected_inputs.len() + amount_selection.newly_selected_inputs.len() > INPUT_COUNT_MAX.into()
+        if self.selected_inputs.len() + amount_selection.newly_selected_inputs.len() > INPUT_COUNT_MAX as usize
             || potentially_too_many_native_tokens
         {
             // Clear before trying with reversed ordering.
@@ -367,7 +367,7 @@ impl InputSelection {
             }
         }
 
-        if self.selected_inputs.len() + amount_selection.newly_selected_inputs.len() > INPUT_COUNT_MAX.into() {
+        if self.selected_inputs.len() + amount_selection.newly_selected_inputs.len() > INPUT_COUNT_MAX as usize {
             return Err(Error::InvalidInputCount(
                 self.selected_inputs.len() + amount_selection.newly_selected_inputs.len(),
             ));
@@ -446,7 +446,7 @@ impl InputSelection {
             );
             log::debug!("Triggering another amount round as non-basic outputs need to be transitioned first");
 
-            if self.selected_inputs.len() + amount_selection.newly_selected_inputs.len() <= INPUT_COUNT_MAX.into() {
+            if self.selected_inputs.len() + amount_selection.newly_selected_inputs.len() <= INPUT_COUNT_MAX as usize {
                 self.available_inputs
                     .retain(|input| !amount_selection.newly_selected_inputs.contains_key(input.output_id()));
 
